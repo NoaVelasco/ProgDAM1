@@ -58,8 +58,8 @@ public class Bucles_while {
 
         System.out.println("--------------------------------");
 
-        // version alternativa:
-        System.out.println(ANSI_BLUE + "Version alternativa" + ANSI_RESET);
+        // version 2:
+        System.out.println(ANSI_BLUE + "Version alternativa 1" + ANSI_RESET);
         System.out.print("Dame un numero: ");
         int kirby2 = input.nextInt();
         int segundo2;
@@ -72,6 +72,22 @@ public class Bucles_while {
             kirby2 -= segundo2;
 
         } while (segundo2 < kirby2);
+        System.out.println(ANSI_RED + "Ese numero era menor que el anterior." + ANSI_RESET);
+
+        System.out.println("--------------------------------");
+        
+        // version 3:
+        System.out.println(ANSI_BLUE + "Version alternativa 2" + ANSI_RESET);
+        System.out.print("Dame un numero: ");
+        int numC = input.nextInt();
+        int varC = 0;
+
+        while (numC>=varC) {
+            varC = numC;
+            System.out.print("Dame otro numero: ");
+            numC = input.nextInt();
+        }
+        
         System.out.println(ANSI_RED + "Ese numero era menor que el anterior." + ANSI_RESET);
 
         System.out.println("--------------------------------");
@@ -105,6 +121,8 @@ public class Bucles_while {
         } while (suma < limit);
         System.out.println(ANSI_RED + "Limite superado" + ANSI_RESET);
         System.out.println("--------------------------------");
+
+        input.close();
     }
 
 }
