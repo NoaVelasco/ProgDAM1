@@ -21,7 +21,7 @@ public class dowhile {
         // 1. pide hasta meter cero     
         int num;
         do {
-            System.out.print("Dame un numero: ");
+            System.out.print("Dame un número: ");
             num = input.nextInt();
         } while (num != 0);
 
@@ -35,47 +35,126 @@ public class dowhile {
             opcion = input.nextLine();
         } while (!opcion.equalsIgnoreCase("no"));
 
-        
         // 3. pide fecha hasta que sea correcta
-        
-        /* TODO esto es lo que hice para comprobar fechas. Lo aprovecho y veo cómo meterlo en un while
-        
-        System.out.print("Dime un mes: ");
-        String mes = teclado.next();
-        System.out.print("Dime un ano: ");
-        int anio = teclado.nextInt();
-        System.out.print("Dime el dia del mes: ");
-        int dia = teclado.nextInt();
+        boolean fecha = false;
         boolean bisiesto;
-        
-        if ((anio % 4 == 0 && anio % 100 != 0) || anio % 400 == 0) {
-            bisiesto = true;
-            System.out.println("El ano " + anio + " es bisiesto");
-        } else {
-            bisiesto = false;
-            System.out.println("El ano " + anio + " NO es bisiesto");
-        }
-        
-        switch (mes) {
-            case "enero": case "marzo": case "mayo": case "julio": case "agosto": case "octubre": case "diciembre":
-            case "1": case "3": case "5": case "7": case "8": case "10": case "12":
-                System.out.println("El mes tiene 31 dias.");
-                break;
-            case "abril": case "junio": case "septiembre": case "noviembre":
-            case "4": case "6": case "9": case "11":
-                System.out.println("El mes tiene 30 dias.");
-                break;
-            case "febrero": case "2":
-                if (bisiesto) {
-                    System.out.println("El mes tiene 29 dias.");
-                } else {
-                    System.out.println("El mes tiene 28 dias.");
-                }
-                break;
-            default:
-                System.out.println("No te he entendido.");
-        }
-        */
+
+        do {
+            System.out.println("Introduce una fecha (dd mm aaaa): ");
+            int dia = input.nextInt();
+            int mes = input.nextInt();
+            int anio = input.nextInt();
+            bisiesto = (anio % 4 == 0 && anio % 100 != 0) || anio % 400 == 0;
+
+            switch (mes) {
+                case 1:
+                case 3:
+                case 5:
+                case 7:
+                case 8:
+                case 10:
+                case 12:
+                    if (dia <= 31 && dia > 0) {
+                        fecha = true;
+                    } else {
+                        System.out.println("No es una fecha correcta.");
+                    }
+                    break;
+                case 4:
+                case 6:
+                case 9:
+                case 11:
+                    if (dia <= 30 && dia > 0) {
+                        fecha = true;
+                    } else {
+                        System.out.println("No es una fecha correcta.");
+                    }
+                    break;
+                case 2:
+                    if (bisiesto && dia <= 29 && dia > 0) {
+                        fecha = true;
+                    } else if (bisiesto == false && dia <= 28 && dia > 0) {
+                        fecha = true;
+                    } else {
+                        System.out.println("No es una fecha correcta.");
+                    }
+                    break;
+                default:
+                    System.out.println("No es una fecha correcta.");
+            }
+
+        } while (fecha == false);
+
+        System.out.println("Esa fecha es correcta.");
+
+        // 4. Menú con dos submenús
+        String menu = "FILE MENU \n1. New_File... \n2. Save... \n3. Exit";
+        String submenu1 = "NEW FILE SUBMENU \n1. Java \n2. Python \n3. Back";
+        String submenu2 = "SAVE FILE SUBMENU \n1. .java \n2. .py \n3. Back";
+        int directory = 0;
+        boolean loop = true;
+
+        do {
+            switch (directory) {
+                case 0:
+                    System.out.println(menu);
+                    System.out.println("Choose an option: ");
+                    switch (input.nextLine().toLowerCase()) {
+                        case "1", "new file", "new_file" ->
+                            directory = 1;
+                        case "2", "save" ->
+                            directory = 2;
+                        case "3", "exit" ->
+                            loop = false;
+                        default ->
+                            System.out.println("Repeat the input");
+                    }
+                    break;
+                case 1:
+                    System.out.println(submenu1);
+                    System.out.println("Choose an option: ");
+                    switch (input.nextLine().toLowerCase()) {
+                        case "1", "java" -> {
+                            System.out.println("Creating new JAVA file...");
+                            directory = 0;
+                        }
+                        case "2", "python" -> {
+                            System.out.println("Creating new PYTHON file...");
+                            directory = 0;
+                        }
+                        case "3", "back" ->
+                            directory = 0;
+                        default ->
+                            System.out.println("Repeat the input");
+                    }
+                    break;
+                case 2:
+                    System.out.println(submenu2);
+                    System.out.println("Choose an option: ");
+                    switch (input.nextLine().toLowerCase()) {
+                        case "1", "java" -> {
+                            System.out.println("Saving as JAVA file...");
+                            directory = 0;
+                        }
+                        case "2", "py" -> {
+                            System.out.println("Saving as PYTHON file...");
+                            directory = 0;
+                        }
+                        case "3", "back" ->
+                            directory = 0;
+                        default ->
+                            System.out.println("Repeat the input");
+                    }
+                    break;
+
+                default:
+                    System.out.println("Repeat the input");
+            }
+
+        } while (loop);
+        System.out.println("Hasta luegui...");
+
+        input.close();
     }
 
 }
