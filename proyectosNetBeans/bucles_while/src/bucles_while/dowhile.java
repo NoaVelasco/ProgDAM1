@@ -18,6 +18,7 @@ public class dowhile {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
 
+
         // 1. pide hasta meter cero     
         int num;
         do {
