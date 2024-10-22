@@ -17,7 +17,6 @@ public class programa_menu {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
         Scanner input = new Scanner(System.in);
         int opcion = 0;
         int numInicio;
@@ -27,8 +26,10 @@ public class programa_menu {
         int mes;
         int dia;
         int anoChino;
+
         do {
             switch (opcion) {
+                // MENU
                 case 0:
                     System.out.println("MENU PRINCIPAL \nElige una de las siguientes opciones (1-4): ");
                     System.out.println("1: Sumatorio");
@@ -37,6 +38,8 @@ public class programa_menu {
                     System.out.println("4: Salir");
                     opcion = input.nextInt();
                     break;
+
+                // SUMATORIO
                 case 1:
                     System.out.println("\nSUMATORIO");
                     System.out.print("Introduce el primer numero (punto de partida): ");
@@ -52,15 +55,10 @@ public class programa_menu {
                     System.out.println(" = " + suma + "\n");
                     opcion = 0;
                     break;
-                case 2:
 
+                // EDAD    
+                case 2:
                     System.out.println("\nEDAD");
-//                    System.out.print("Dime tu dia de nacimiento: ");
-//                    dia = input.nextInt();
-//                    System.out.print("Dime tu mes de nacimiento: ");
-//                    mes = input.nextInt();
-//                    System.out.print("Dime tu ano de nacimiento: ");
-//                    ano = input.nextInt();
 
                     System.out.println("Dime tu fecha de nacimiento ('dd mm aa'): ");
                     dia = Integer.parseInt(input.next());
@@ -92,6 +90,7 @@ public class programa_menu {
                     opcion = 0;
                     break;
 
+                // HOROSCOPO
                 case 3:
                     System.out.println("\nHOROSCOPO CHINO");
                     System.out.print("Dime un ano: ");
@@ -146,7 +145,8 @@ public class programa_menu {
             }
 
         } while (opcion != 4);
-        System.out.println("Bienvenido");
+        System.out.println("Adios, comprame un libro.");
+        input.close();
     }
 
 }
