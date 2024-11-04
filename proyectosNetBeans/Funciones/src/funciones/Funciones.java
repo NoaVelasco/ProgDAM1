@@ -66,9 +66,14 @@ public class Funciones {
     // Este método devolverá un número entero aleatorio. Muestra estos números por pantalla.
     public static void randomNums(int cantidad) {
         for (; cantidad > 0; cantidad--) {
-            randomero = Math.random() * 100;
+//            randomero = Math.random() * 100;
+//            System.out.println((int) randomero);
 
-            System.out.println((int) randomero);
+//          Random funciona como en otros lenguajes y requiere de ciertas operaciones 
+//          para marcarle el rango de 1 a 100.
+            int randomInt = (int) (Math.random() * 100) + 1;
+            System.out.println(randomInt);
+
         }
     }
 
