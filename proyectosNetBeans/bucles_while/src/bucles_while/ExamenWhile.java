@@ -77,6 +77,7 @@ public class ExamenWhile {
                 multiInput += input;
             } else {
                 for (int i = 0; i < multiInput.length(); i++) {
+
                     isDigit = "";
                     isDigit += multiInput.charAt(i);
                     switch (isDigit) {
