@@ -150,13 +150,17 @@ public class Testeo {
         // condición de victoria: que el número de letras desconocido sea 0
         int unresolved = palabra.length();
 
+        // condición de derrota, que agote 6 vidas
+        int vidas = 6;
+
         for (int i = 0; i < palabra.length(); i++) {
             hidden1 += "_";
         }
 
-        while (unresolved > 0) {
+        while (unresolved > 0 && vidas > 0) {
             // Hay nuevas letras acertadas?
             boolean newLet = false;
+            boolean strike = false;
 
             System.out.println("Dime una letra: ");
             char guessLetter = sc.next().toUpperCase().charAt(0);
@@ -171,11 +175,15 @@ public class Testeo {
                     newLet = true;
                 } else {
                     hidden2 += hidden1.charAt(i);
+                    strike = true;
                 }
             }
             hidden1 = hidden2;
             if (newLet) {
                 System.out.println("¡Bravo, has acertado una letra!");
+            } else if (strike) {
+                vidas--;
+                System.out.println("Has fallado. Tienes " + vidas + " vidas.");
             } else {
                 System.out.println("No has acertado letras nuevas");
             }
@@ -183,7 +191,12 @@ public class Testeo {
             System.out.println(hidden1);
 
         }
-        System.out.println("¡Enhorabuena! Has ganado.");
+        if (vidas > 0) {
+
+            System.out.println("¡Enhorabuena! Has ganado.");
+        } else {
+            System.out.println("Has perdido.");
+        }
     }
 
     public static void main(String[] args) {
