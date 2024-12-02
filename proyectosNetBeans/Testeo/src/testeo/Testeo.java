@@ -48,7 +48,7 @@ public class Testeo {
 
     public static String menu = """
             +------------------+
-            |       MENÚ      |
+            |       MENÚ       |
             +------------------+
             | 1. Ahorcado      |
             | 2. Recursividad  |

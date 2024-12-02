@@ -1,9 +1,4 @@
-/proyectosNetBeans/JavaApplication2/nbproject/private/
-/proyectosNetBeans/PruebaPractica2/nbproject/private/
-/proyectosNetBeans/bucles_while/nbproject/private/
-/proyectosNetBeans/examen_condicionales/nbproject/private/
-/proyectosNetBeans/Funciones/nbproject/private/
-/proyectosNetBeans/PruebaFor/nbproject/private/
+/proyectosNetBeans/*/nbproject/private/
 build/
 build.xml
 manifest.mf
@@ -11,5 +6,3 @@ build-impl.xml
 genfiles.properties
 project.properties
 project.xml
-/proyectosNetBeans/Testeo/nbproject/private/
-/proyectosNetBeans/Arrays/nbproject/private/

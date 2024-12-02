@@ -1,0 +1,159 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+ */
+package examen1eva;
+
+import java.util.Scanner;
+
+/**
+ *
+ * @author dam1
+ */
+public class Examen1eva {
+
+    /**
+     * @param args the command line arguments
+     */
+    static Scanner sc = new Scanner(System.in);
+
+    public static String menu = """
+            *********************************************************
+            
+            ***************** EXAMEN DE PROGRAMACION ****************
+            
+            *********************************************************
+            
+            *             1. Juego del Ahorcado
+            
+            *             2. Torres de hanoi recursivas.
+            
+            *             3. Dibuja un arbol.
+            
+            *             0. Salir
+            
+            *********************************************************
+            """;
+    public static int option = 1;
+
+    public static void menu() {
+        System.out.println(menu);
+        System.out.print("Elige una opción: ");
+        option = sc.nextInt();
+        switch (option) {
+            case 1:
+                ahorcado();
+                break;
+            case 2:
+                recursividad();
+                break;
+            case 3:
+                dibujo();
+                break;
+            case 0:
+                System.out.println("Adiós!");
+                break;
+            default:
+                System.out.println("Opción no válida. Inténtalo de nuevo.");
+                menu();
+        }
+    }
+
+    public static void dibujo() {
+        System.out.println("Dibujo de arbol navideno");
+        System.out.print("Introduce el tamaño del arbol del 1 al 9: ");
+        int naviPower = sc.nextInt();
+        arbolito(naviPower);
+    }
+
+    public static void ahorcado() {
+        System.out.println("Ahorcado");
+        System.out.print("Introduce la palabra a adivinar: ");
+
+        String palabra = sc.next();
+        System.out.println("Numero de letras: " + palabra.length());
+        hangout(palabra);
+    }
+
+    public static void hangout(String palabra) {
+        // Creamos una variable del tamaño de palabra con espacios para resolver
+        String hidden1 = "";
+        String hidden2;
+
+        palabra = palabra.toUpperCase();
+
+        // condición de victoria: que el número de letras desconocido sea 0
+        int unresolved = palabra.length();
+
+        // condición de derrota, que agote 6 vidas
+        int vidas = 10;
+
+        for (int i = 0; i < palabra.length(); i++) {
+            hidden1 += "_";
+        }
+
+        while (unresolved > 0 && vidas > 0) {
+            // Hay nuevas letras acertadas?
+            boolean hasLetter = false;
+            boolean strike = false;
+
+            System.out.println("Dime una letra: ");
+            char guessLetter = sc.next().toUpperCase().charAt(0);
+            hidden2 = "";
+
+            // Si la letra está en la palabra, la añade y resta un caracter desconocido
+            // Si no, o si ya está dicha, se mantiene.
+            for (int i = 0; i < palabra.length(); i++) {
+                if (guessLetter == palabra.charAt(i) && guessLetter != hidden1.charAt(i)) {
+                    hidden2 += guessLetter;
+                    System.out.println("A tope, has acertado una letra en la posición " + (i + 1) + "!");
+                    unresolved--;
+                    hasLetter = true;
+                } else {
+                    if (guessLetter != hidden1.charAt(i)) {
+                        hasLetter = true;
+                    } else {
+                        
+                    strike = true;
+                    }
+                    hidden2 += hidden1.charAt(i);
+                }
+            }
+            hidden1 = hidden2;
+            if (!hasLetter) {
+                
+            }
+            if (strike) {
+                vidas--;
+                System.out.println("Has fallado. Tienes " + vidas + " intentos mas.");
+            } else {
+                System.out.println("No has acertado letras nuevas");
+            }
+
+            System.out.println(hidden1);
+
+        }
+        if (vidas > 0) {
+
+            System.out.println("¡Enhorabuena! Has ganado.");
+        } else {
+            System.out.println("Has perdido.");
+        }
+    }
+
+    public static void arbolito(int maximo) {
+
+    }
+
+    public static void recursividad() {
+    }
+
+    public static void main(String[] args) {
+        while (option != 0) {
+
+            menu();
+
+        }
+    }
+
+}
