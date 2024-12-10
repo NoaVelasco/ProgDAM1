@@ -1,12 +1,13 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
+ */
+package arrays;
 
 import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
- */
 /**
  *
  * @author dam1
@@ -77,7 +78,7 @@ public class matrices {
 
     public static void ordena() {
         // 2. Crea un array de números enteros positivos, después realiza un método que haga la ordenación del array de menor a mayor
-        
+
         System.out.println("---------");
         System.out.println("Ordena arrays");
         int[] matrizDesOr = new int[9];
@@ -90,7 +91,7 @@ public class matrices {
         System.out.println(Arrays.toString(matrizDesOr));
 
         int menor;
-        
+
         for (int i = 0; i < matrizDesOr.length; i++) {
             for (int j = i + 1; j < matrizDesOr.length; j++) {
                 if (matrizDesOr[i] > matrizDesOr[j]) {
@@ -101,7 +102,6 @@ public class matrices {
             }
         }
         System.out.println(Arrays.toString(matrizDesOr));
-
     }
 
     public static void main(String[] args) {
