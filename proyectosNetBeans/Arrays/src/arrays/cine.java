@@ -10,8 +10,8 @@ import java.util.Scanner;
  *
  * @author dam1
  */
-public class cine {
 
+public class cine {
     /**
      * @param args the command line arguments
      */
@@ -20,7 +20,6 @@ public class cine {
     static String[][] room1 = new String[10][10];
     static String[][] room2 = new String[10][10];
     static String[][] room3 = new String[10][10];
-
     static String menuStr = """
             +------------------+
             |       CINE       |
@@ -43,7 +42,6 @@ public class cine {
             while (reserved && operation) {
                 System.out.println("Quieres reservar un asiento? (s/n): ");
                 if (sc.next().equalsIgnoreCase("s")) {
-
                     System.out.print("Introduce la fila en la que quieres reservar: ");
                     int row = sc.nextInt() - 1;
                     System.out.print("Introduce el asiento en el que te quieres sentar: ");
@@ -63,9 +61,6 @@ public class cine {
 
     }
 
-//    public static boolean isReserved(String[][] room, int row, int col) {
-//
-//    }
     public static void makeRooms() {
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
@@ -80,13 +75,10 @@ public class cine {
         switch (nRoom) {
             case 1:
                 return room1;
-
             case 2:
                 return room2;
-
             case 3:
                 return room3;
-
             default:
                 throw new AssertionError();
         }
@@ -114,5 +106,4 @@ public class cine {
             menu();
         }
     }
-
 }

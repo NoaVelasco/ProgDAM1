@@ -20,54 +20,59 @@ public class buscaminas {
 
     static int nMinas = 0;
     static Random hayMina = new Random();
-    static String[][] tablero;
-    static String[][] hidTablero;
-    static String hr = "+--------------------------------------------+";
+    static String[][] bckBoard;
+    static String[][] frntBoard;
+    static String hr = "+-----------------------------+";
     static String prMines = "  MINAS: ";
-    static String prRows = "  q: quitar | Introduce fila (1-9): ";
-    static String prCols =  "  q: quitar | Introduce columna (A-I): ";
+//    static String quit = "  seguir (s/n)";
+    static String prRows = "  Introduce fila (1-9): ";
+    static String prCols = "  Introduce columna (A-I): ";
     static boolean loop = true;
 
     public static String[][] makeBackBoard() {
-        String[][] tablero = new String[9][9];
-        for (int i = 0; i < tablero.length; i++) {
-            for (int j = 0; j < tablero.length; j++) {
+        String[][] board = new String[9][9];
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board.length; j++) {
                 int rndm = hayMina.nextInt(9);
                 if (rndm == 1) {
-                    tablero[i][j] = "*";
+                    board[i][j] = "*";
                     nMinas++;
                 } else {
-                    tablero[i][j] = "@";
+                    board[i][j] = " ";
                 }
             }
         }
-        return tablero;
+        return board;
+    }
+    
+//    public static TODO algoritmo que comprueba numeros de minas
+    
+
+
+    public static String[][] makeFrontBoard() {
+        String[][] board = new String[9][9];
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board.length; j++) {
+                board[i][j] = "#";
+            }
+        }
+        return board;
     }
 
-    public static void showBoard(String[][] tablero, int nMinas) {
-        for (String[] columnas : tablero) {
+    public static void showBoard(String[][] board) {
+        for (String[] columnas : board) {
             System.out.println(Arrays.toString(columnas));
         }
         System.out.println("Hay " + nMinas + " minas.");
     }
 
-    public static String[][] makeFrontBoard() {
-        String[][] tablero = new String[9][9];
-        for (int i = 0; i < tablero.length; i++) {
-            for (int j = 0; j < tablero.length; j++) {
-                tablero[i][j] = "#";
-            }
-        }
-        return tablero;
-    }
-
-    public static void updateBoard(String[][] tablero, int nMinas) {
+    public static void updateBoard(String[][] board, int nMinas) {
         System.out.println("    A B C D E F G H I");
         System.out.println("    -----------------");
-        for (int i = 0; i < tablero.length; i++) {
+        for (int i = 0; i < board.length; i++) {
             System.out.print((i + 1) + " | ");
-            for (int j = 0; j < tablero[i].length; j++) {
-                System.out.print(tablero[i][j] + " ");
+            for (int j = 0; j < board[i].length; j++) {
+                System.out.print(board[i][j] + " ");
             }
             System.out.println("");
         }
@@ -75,42 +80,71 @@ public class buscaminas {
     }
 
     public static void menu() {
-        updateBoard(hidTablero, nMinas);
+//        updateBoard(frntBoard, nMinas);
         System.out.println(hr);
         System.out.println(prMines + nMinas);
+//        System.out.println(hr);
+//        System.out.println(quit);
+//        String question = sc.next();
+//        sc.nextLine();
+//        if (question.equalsIgnoreCase("n")) {
+//            loop = false;
+//            return;
+//        }
         System.out.println(hr);
-        System.out.print(prRows);
-        String rowStr = sc.next();
-        if (rowStr.equals("q")) {
-            loop = false;
-            return;
-        }
-        int row = Integer.parseInt(rowStr)-1;
         System.out.print(prCols);
         String column = sc.next();
-        if (column.equals("q")) {
-            loop = false;
-            return;
-        } 
-        int col = (int)column.toLowerCase().charAt(0);
+
+        int col = (int) column.toLowerCase().charAt(0);
         col -= 97;
-        System.out.println(row + " - " + col);
-        
-        
-        
+
+        System.out.print(prRows);
+        String rowStr = sc.next();
+
+        int row = Integer.parseInt(rowStr) - 1;
+        System.out.println("->" + row + " - " + col);
+
+        checkTile(row, col);
+        if (nMinas == 0) {
+            win();
+        }
+        updateBoard(frntBoard, nMinas);
+    }
+
+    public static void checkTile(int row, int col) {
+        if (bckBoard[row][col].contentEquals("*")) {
+            frntBoard[row][col] = "X";
+            lose();
+        } else if (frntBoard[row][col].contentEquals(" ")) {
+            System.out.println("Esa casilla ya está revelada.");
+        } else {
+            frntBoard[row][col] = " ";
+        }
+    }
+
+    public static void win() {
+        System.out.println("Enhorabuena, has ganado!");
+        loop = false;
+    }
+
+    public static void lose() {
+        System.out.println("Oooooh, has perdido :(");
+        loop = false;
     }
 
     // ------------ MAIN -----------------
     public static void main(String[] args) {
         // TODO code application logic here
-        tablero = makeBackBoard();
-        hidTablero = makeFrontBoard();
+        bckBoard = makeBackBoard();
+        frntBoard = makeFrontBoard();
+        updateBoard(frntBoard, nMinas);
 //        showBoard(tablero, nMinas);
 //        updateBoard(hidTablero, nMinas);
         while (loop) {
             menu();
         }
-
+        System.out.println("Fin del juego.");
+        showBoard(bckBoard);
     }
 
 }
