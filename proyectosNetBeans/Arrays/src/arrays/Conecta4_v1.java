@@ -10,7 +10,7 @@ import java.util.Scanner;
  *
  * @author dam1
  */
-public class conecta4 {
+public class Conecta4_v1 {
 
     /**
      * @param args the command line arguments
