@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 
+//package arrays;
+
 import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
@@ -29,25 +31,66 @@ public class buscaminas {
     static String prCols = "  Introduce columna (A-I): ";
     static boolean loop = true;
 
-    public static String[][] makeBackBoard() {
-        String[][] board = new String[9][9];
+    public static char[][] makeBackBoard() {
+        char[] plainBoard = new char[81];
+        for (char cell : plainBoard) {
+            int rndm = hayMina.nextInt(9);
+            if (rndm == 1) {
+                cell = '*';
+                nMinas++;
+            }
+        }
+        plainBoard = scanNMines(plainBoard);
+        int cellBoard = 0;
+        char[][] board = new char[9][9];
         for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board.length; j++) {
-                int rndm = hayMina.nextInt(9);
-                if (rndm == 1) {
-                    board[i][j] = "*";
-                    nMinas++;
-                } else {
-                    board[i][j] = " ";
-                }
+            for (int j = 0; j < board[i].length; j++) {
+                board[i][j] = plainBoard[cellBoard];
             }
         }
         return board;
     }
-    
-//    public static TODO algoritmo que comprueba numeros de minas
-    
+    //    public static String[][] makeBackBoard() {
+    //        String[][] board = new String[9][9];
+    //        for (int i = 0; i < board.length; i++) {
+    //            for (int j = 0; j < board.length; j++) {
+    //                int rndm = hayMina.nextInt(9);
+    //                if (rndm == 1) {
+    //                    board[i][j] = "*";
+    //                    nMinas++;
+    //                } else {
+    //                    board[i][j] = " ";
+    //                }
+    //            }
+    //        }
+    //        return board;
+    //    }
 
+    //    public static TODO algoritmo que comprueba numeros de minas
+    public static void revealNMines(int row, int col) {
+
+    }
+
+    public static char[] scanNMines(char[] board) {
+        int[] positions = {-6, -5, -4, -1, 1, 4, 5, 6};
+        for (int i = 0; i < board.length; i++) {
+            if (board[i] == '*') {
+                continue;
+            }
+            int totMines = 0;
+            for (int pos : positions) {
+                int j = i + pos;
+                if (j < 0 || j >= board.length) {
+                    continue;
+                }
+                if (board[j] == '*') {
+                    totMines++;
+                }
+            }
+            board[i] = (char) totMines;
+        }
+        return board;
+    }
 
     public static String[][] makeFrontBoard() {
         String[][] board = new String[9][9];
@@ -102,7 +145,7 @@ public class buscaminas {
         String rowStr = sc.next();
 
         int row = Integer.parseInt(rowStr) - 1;
-        System.out.println("->" + row + " - " + col);
+        System.out.println("  ---------------------\n  fila " + row + " - columna " + col + "\n");
 
         checkTile(row, col);
         if (nMinas == 0) {
