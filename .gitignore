@@ -6,3 +6,5 @@
 # genfiles.properties
 # project.properties
 # project.xml
+/proyectosNetBeans/Strings/nbproject/private/
+/proyectosNetBeans/Strings/build/
