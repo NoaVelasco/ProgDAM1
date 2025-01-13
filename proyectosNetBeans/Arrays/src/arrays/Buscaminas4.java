@@ -13,12 +13,11 @@ import java.util.Scanner;
  *
  * @author dam1
  */
-public class buscaminas3 {
+public class Buscaminas4 {
 
     /**
      * @param args the command line arguments
      */
-
 //    @TODO algoritmo que descubre las casillas con números alrededor.
     static Scanner sc = new Scanner(System.in);
 
@@ -60,10 +59,31 @@ public class buscaminas3 {
         return board;
     }
 
+    public static int[][] getCellsAround(int row, int col, char[][] board) {
+        int[] rowOffsets = {-1, -1, -1, 0, 0, 1, 1, 1};
+        int[] colOffsets = {-1, 0, 1, -1, 1, -1, 0, 1};
+        int[][] cellsAround = new int[8][2];
+        int count = 0;
+
+        for (int i = 0; i < rowOffsets.length; i++) {
+            int newRow = row + rowOffsets[i];
+            int newCol = col + colOffsets[i];
+
+            if (newRow >= 0 && newRow < board.length && newCol >= 0 && newCol < board[0].length) {
+
+                cellsAround[count][0] = newRow;
+                cellsAround[count][1] = newCol;
+                count++;
+
+            }
+        }
+
+        return cellsAround;
+    }
+
 //    public static void revealNMines(int row, int col) {
 //
 //    }
-
     public static char[] scanNMines(char[] board) {
         int[] positions = {-10, -9, -8, -1, 1, 8, 9, 10};
         for (int i = 0; i < board.length; i++) {
