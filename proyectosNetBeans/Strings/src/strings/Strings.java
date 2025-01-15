@@ -58,7 +58,7 @@ public class Strings {
             phrase = sc.nextLine();
             infinite += phrase;
             infinite += " ";
-        } while (!phrase.equals(""));
+        } while (!phrase.isEmpty());
 
         System.out.println(infinite);
     }
