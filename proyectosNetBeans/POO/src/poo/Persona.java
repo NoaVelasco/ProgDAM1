@@ -25,7 +25,7 @@ public class Persona {
 
     Direccion[] direccion;
 
-    public int calcularIMC() {
+    int calcularIMC() {
         int output;
 
         double formula = this.peso / Math.pow(this.altura, 2);
@@ -41,7 +41,7 @@ public class Persona {
         return output;
     }
 
-    public boolean esMayorDeEdad() {
+    boolean esMayorDeEdad() {
         return this.edad >= 18;
     }
 
