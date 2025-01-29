@@ -5,7 +5,6 @@
 package poo;
 
 //import java.util.Scanner;
-
 /**
  *
  * @author dam1
@@ -69,7 +68,7 @@ public class POO {
 //        System.out.println(nif1.toString());
 //        Dni nif2 = new Dni(12345678);
 //        System.out.println(nif2.toString());
-
+        /*
         Cafetera italiana = new Cafetera();
         Cafetera electrica = new Cafetera(1500);
         Cafetera puchero = new Cafetera(600, 50);
@@ -109,8 +108,9 @@ public class POO {
         System.out.println(puchero.getCapacidadActual());
         puchero.llenarCafetera();
         System.out.println(puchero.getCapacidadActual());
-           
+         */
 
+        Electrodomestico lavadora = new Electrodomestico();
+        
     }
-
 }

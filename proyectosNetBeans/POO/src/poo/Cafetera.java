@@ -13,7 +13,6 @@ public class Cafetera {
     private int _capacidadMaxima = 1000;
     private int _capacidadActual = 0;
 
-
     public void llenarCafetera() {
         System.out.println("JJjjjjjjjj... ssssshhhh... Cafetera llena.");
         this._capacidadActual = _capacidadMaxima;
@@ -78,7 +77,11 @@ public class Cafetera {
     }
 
     public void setCapacidadActual(int _capacidadActual) {
-        this._capacidadActual = _capacidadActual;
+        if (_capacidadActual > _capacidadMaxima) {
+            this._capacidadActual = _capacidadMaxima;
+        } else {
+            this._capacidadActual = _capacidadActual;
+        }
     }
 
 }
