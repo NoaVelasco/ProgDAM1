@@ -64,11 +64,53 @@ public class POO {
 //        Persona rodolfo = new Persona(nombre, apellidos, edad, peso, altura, direcciones);
 //        
 //        System.out.println(rodolfo.toString());
-        Dni nif1 = new Dni();
-        nif1.leer();
-        Dni nif2 = new Dni(12345678);
-        System.out.println(nif1.toString());
-        System.out.println(nif2.toString());
+//        Dni nif1 = new Dni();
+//        nif1.leer();
+//        System.out.println(nif1.toString());
+//        Dni nif2 = new Dni(12345678);
+//        System.out.println(nif2.toString());
+
+        Cafetera italiana = new Cafetera();
+        Cafetera electrica = new Cafetera(1500);
+        Cafetera puchero = new Cafetera(600, 50);
+        
+        // ----------------- ITALIANA
+        System.out.println(italiana.getCapacidadActual());
+        System.out.println(italiana.getCapacidadMaxima());
+        italiana.servirTaza(150);
+        System.out.println(italiana.getCapacidadActual());
+        italiana.agregarCafe(400);
+        System.out.println(italiana.getCapacidadActual());
+        italiana.vaciarCafetera();
+        System.out.println(italiana.getCapacidadActual());
+        italiana.llenarCafetera();
+        System.out.println(italiana.getCapacidadActual());
+        
+        // ----------------- ELECTRICA
+        System.out.println(electrica.getCapacidadActual());
+        System.out.println(electrica.getCapacidadMaxima());
+        electrica.servirTaza(150);
+        System.out.println(electrica.getCapacidadActual());
+        electrica.agregarCafe(400);
+        System.out.println(electrica.getCapacidadActual());
+        electrica.vaciarCafetera();
+        System.out.println(electrica.getCapacidadActual());
+        electrica.llenarCafetera();
+        System.out.println(electrica.getCapacidadActual());
+        
+        // ----------------- PUCHERO
+        System.out.println(puchero.getCapacidadActual());
+        System.out.println(puchero.getCapacidadMaxima());
+        puchero.servirTaza(150);
+        System.out.println(puchero.getCapacidadActual());
+        puchero.agregarCafe(400);
+        System.out.println(puchero.getCapacidadActual());
+        puchero.vaciarCafetera();
+        System.out.println(puchero.getCapacidadActual());
+        puchero.llenarCafetera();
+        System.out.println(puchero.getCapacidadActual());
+           
+
     }
 
 }
