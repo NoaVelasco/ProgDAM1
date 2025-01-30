@@ -2,16 +2,15 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
-package ejercicios;
+package strings;
 
 import java.util.Arrays;
-import java.util.Set;
 
 /**
  *
- * @author noave
+ * @author dam1
  */
-public class Strings {
+public class Apuntes {
 
     /**
      * @param args the command line arguments
@@ -125,10 +124,9 @@ public class Strings {
             >> Prefiero usar System.out.printf()
                  double precio = 5.15;
                  System.out.printf("%.2f", precio);""");
-        
+
         double precio = 5.15678;
         System.out.printf("%.2f %n", precio);
-
 
         System.out.println("""
                            
