@@ -110,7 +110,38 @@ public class POO {
         System.out.println(puchero.getCapacidadActual());
          */
 
+        /*
         Electrodomestico lavadora = new Electrodomestico();
+        Electrodomestico tostadora = new Electrodomestico(50, 4.00);
+        Electrodomestico lavavajillas = new Electrodomestico(200, 6, "azul", 'B');
+        Electrodomestico horno = new Electrodomestico(300, 10, "fucsia", 'G');
+        
+        System.out.println(lavadora.toString());
+        System.out.println(tostadora.toString());
+        System.out.println(lavavajillas.toString());
+        System.out.println(horno.toString());
+ 
+        lavadora.precioFinal(lavadora.getPrecioBase());
+        tostadora.precioFinal(tostadora.getPrecioBase());
+        lavavajillas.precioFinal(lavavajillas.getPrecioBase());
+        horno.precioFinal(horno.getPrecioBase());
+        
+        System.out.println(lavadora.toString());
+        System.out.println(tostadora.toString());
+        System.out.println(lavavajillas.toString());
+        System.out.println(horno.toString());
+        */
+        
+        Password pass1 = new Password();
+        Password pass2 = new Password(32);
+        
+        System.out.println(pass1.contrasena + pass1.esFuerte(pass1.contrasena));
+        System.out.println(pass2.contrasena + pass2.esFuerte(pass2.contrasena));
+        
+        pass1.longitud = 30;
+        pass1.generarPassFuerte(pass1.longitud);
+        System.out.println(pass1.contrasena + pass1.esFuerte(pass1.contrasena));
+        
         
     }
 }
