@@ -15,6 +15,9 @@ public class BarcosMain {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        Game partida = new Game(10, 10);
+        System.out.println("mierda");
+        partida.play();
     }
     
 }
