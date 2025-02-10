@@ -14,8 +14,9 @@ import java.util.Scanner;
 public class Board {
 
     private final int TILES_W, TILES_H;
-    private char[][] board;
+    private char[][] bckBoard, frntBoard;
     private int col, row;
+    
 
     // OUTPUTS -----------------------
     final char H2O = 'A';
@@ -53,25 +54,25 @@ public class Board {
     }
 
     private void makeBoard() {
-        board = new char[TILES_H][TILES_W];
-        for (char[] board1 : board) {
-            Arrays.fill(board1, SEA);
+        bckBoard = new char[TILES_H][TILES_W];
+        frntBoard = new char[TILES_H][TILES_W];
+        for (int i = 0; i < bckBoard.length; i++) {
+            Arrays.fill(bckBoard[i], SEA);
+            Arrays.fill(frntBoard[i], SEA);
         }
     }
 
-    public void updateBoard() {
+    public void updateBoard(boolean hidden) {
+        char[][] board = hidden ? frntBoard : bckBoard;
         System.out.println(letterLegend);
         System.out.println("   " + hr);
         for (int i = 0; i < board.length; i++) {
             if (i < 9) {
                 System.out.print(" " + (i + 1));
-
             } else {
                 System.out.print(i + 1);
-
             }
             System.out.print(" | ");
-
             for (int j = 0; j < board[i].length; j++) {
                 System.out.print(board[i][j] + " ");
             }
@@ -94,69 +95,70 @@ public class Board {
                     horiz = true;
                 case 'n' ->
                     horiz = false;
-                default ->
+                default -> {
                     System.out.println("Por favor, elige una opcion");
+                    continue;
+                }
             }
-
             System.out.println("""
                                Elige la posicion inicial.
                                [ Recuerda dejar suficiente espacio ]""");
-
             System.out.print(">  Introduce columna (LETRA): ");
             String column = sc.nextLine();
             col = (int) column.toLowerCase().charAt(0);
             col -= 'a';
-
             System.out.print(">  Introduce fila (NUMERO): ");
             row = Integer.parseInt(sc.nextLine()) - 1;
-
             if (horiz) {
-
                 if (col >= 0 && col + size <= TILES_W) {
                     validPos = true;
                     for (int i = col; i < col + size; i++) {
-                        if (board[row][i] == BOAT) {
+                        if (bckBoard[row][i] == BOAT) {
                             System.out.println("Esas casillas no son válidas.");
                             validPos = false;
                             break;
                         }
                     }
                     if (validPos) {
-                        for (int i = col; i < col + 2; i++) {
-                            board[row][i] = BOAT;
-//                            updateBoard();
+                        
+                        for (int i = col; i < col + size; i++) {
+                            bckBoard[row][i] = BOAT;
                         }
                         inPos = true;
                     }
                 } else {
                     System.out.println("""
-                                       Esas casillas no son v\u00e1lidas.
+                                       Esas casillas no son validas.
                                        [ Debes dejar suficiente espacio a la derecha ] """);
                 }
             } else {
                 if (row >= 0 && row + size <= TILES_H) {
                     validPos = true;
                     for (int i = row; i < row + size; i++) {
-                        if (board[i][col] == BOAT) {
+                        if (bckBoard[i][col] == BOAT) {
                             System.out.println("Esas casillas no son válidas.");
                             validPos = false;
                             break;
                         }
                     }
                     if (validPos) {
-                        for (int i = row; i < row + 2; i++) {
-                            board[i][col] = BOAT;
+                        for (int i = row; i < row + size; i++) {
+                            bckBoard[i][col] = BOAT;
 //                            updateBoard();
                         }
                         inPos = true;
                     }
                 } else {
                     System.out.println("""
-                                       Esas casillas no son v\u00e1lidas.
+                                       Esas casillas no son validas.
                                        [ Debes dejar suficiente espacio hacia abajo ] """);
                 }
             }
         }
-
+        sc.close();
+    }
+    
+    public boolean shot(int row, int col){
+        // @TODO: 
     }
 }
