@@ -16,9 +16,9 @@ public class Board {
     private final int TILES_W, TILES_H;
     private char[][] bckBoard, frntBoard;
     private int col, row;
-    
 
     // OUTPUTS -----------------------
+    Scanner sc = new Scanner(System.in);
     final char H2O = 'A';
     final char BOAT = 'B';
     final char HIT = 'X';
@@ -81,8 +81,24 @@ public class Board {
         System.out.println("   " + hr);
     }
 
+    private void introRowCol() {
+        System.out.print(">  Introduce columna (LETRA): ");
+        String column = sc.nextLine();
+        col = (int) column.toLowerCase().charAt(0);
+        col -= 'a';
+        System.out.print(">  Introduce fila (NUMERO): ");
+
+        String aux = sc.nextLine();
+        String regex = "\\d+";
+        if (aux.matches(regex)) {
+            row = Integer.parseInt(aux) - 1;
+        } else {
+            row = -1;
+        }
+    }
+
     public void putBoat(int size) {
-        Scanner sc = new Scanner(System.in);
+
         boolean horiz = true;
         boolean validPos;
         boolean inPos = false;
@@ -103,12 +119,7 @@ public class Board {
             System.out.println("""
                                Elige la posicion inicial.
                                [ Recuerda dejar suficiente espacio ]""");
-            System.out.print(">  Introduce columna (LETRA): ");
-            String column = sc.nextLine();
-            col = (int) column.toLowerCase().charAt(0);
-            col -= 'a';
-            System.out.print(">  Introduce fila (NUMERO): ");
-            row = Integer.parseInt(sc.nextLine()) - 1;
+            introRowCol();
             if (horiz) {
                 if (col >= 0 && col + size <= TILES_W) {
                     validPos = true;
@@ -120,7 +131,7 @@ public class Board {
                         }
                     }
                     if (validPos) {
-                        
+
                         for (int i = col; i < col + size; i++) {
                             bckBoard[row][i] = BOAT;
                         }
@@ -155,10 +166,23 @@ public class Board {
                 }
             }
         }
-        sc.close();
+
     }
-    
-    public boolean shot(int row, int col){
+
+    public boolean shot() {
         // @TODO: 
+        System.out.println("--------- DISPARAR ----------");
+        boolean noBound = true;
+        while (noBound) {
+            introRowCol();
+            if ((row >= 0 && row < TILES_W) || (col >= 0 && col < TILES_H)) {
+                noBound = false;
+            }
+        }
+        return bckBoard[row][col] == BOAT;
+    }
+
+    public void isHit(boolean impacted) {
+        frntBoard[row][col] = impacted ? HIT : H2O;
     }
 }

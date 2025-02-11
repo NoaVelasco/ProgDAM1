@@ -53,6 +53,12 @@ public class Game {
     public void changePlayer() {
         turn++;
         actualPlayer = (turn % 2);
+        System.out.printf("Es el turno del jugador %d", actualPlayer +1);
+    }
+    
+    public boolean ckWin(int player){
+        System.out.println(scoresArr[player] );
+        return scoresArr[player] == 0;
     }
 
     public void menu() {
@@ -62,18 +68,25 @@ public class Game {
         System.out.println("Turno del jugador " + (actualPlayer + 1));
         System.out.println("-----------------------------------");
         players[actualPlayer].updateBoard(true);
-        System.out.print(">  Introduce columna (LETRA): ");
-        String column = sc.nextLine();
-        col = (int) column.toLowerCase().charAt(0);
-        col -= 'a';
-        System.out.print(">  Introduce fila (NUMERO): ");
-        row = Integer.parseInt(sc.nextLine()) - 1;
-        if (players[actualPlayer].shot(row, col)) {
+//        System.out.print(">  Introduce columna (LETRA): ");
+//        String column = sc.nextLine();
+//        col = (int) column.toLowerCase().charAt(0);
+//        col -= 'a';
+//        System.out.print(">  Introduce fila (NUMERO): ");
+//        row = Integer.parseInt(sc.nextLine()) - 1;
+        if (players[actualPlayer].shot()) {
             System.out.println("¡Impacto!");
+            players[actualPlayer].isHit(true);
             scoresArr[actualPlayer]--;
         } else {
             System.out.println("Agua...");
+            players[actualPlayer].isHit(false);
         }
+        if (ckWin(actualPlayer)) {
+            loop = false;
+            System.out.printf("------ HA GANADO EL JUGADOR %s -----", players[actualPlayer]);
+        }
+        changePlayer();
     }
 
     public void play() {
