@@ -5,6 +5,7 @@
 package HundirFlota;
 
 import java.util.Arrays;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -97,6 +98,19 @@ public class Board {
         }
     }
 
+    public void fakeBoard() {
+        for (int i = 0; i < 3; i++) {
+            while (true) {
+                int randR = new Random().nextInt(10);
+                int randC = new Random().nextInt(10);
+                if (bckBoard[randR][randC] != BOAT) {
+                    bckBoard[randR][randC] = BOAT;
+                    break;
+                }
+            }
+        }
+    }
+
     public void putBoat(int size) {
 
         boolean horiz = true;
@@ -184,5 +198,11 @@ public class Board {
 
     public void isHit(boolean impacted) {
         frntBoard[row][col] = impacted ? HIT : H2O;
+        if (impacted) {
+            frntBoard[row][col] = HIT;
+            bckBoard[row][col] = HIT;
+        } else {
+            frntBoard[row][col] = H2O;
+        }
     }
 }

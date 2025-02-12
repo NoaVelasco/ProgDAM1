@@ -15,8 +15,10 @@ public class Game {
 
     private boolean loop = true;
     private final int[] boatsToPut = {5, 4, 3, 3, 2, 2};
-    private int toWinP1 = Arrays.stream(boatsToPut).sum();
-    private int toWinP2 = Arrays.stream(boatsToPut).sum();
+//    private int toWinP1 = Arrays.stream(boatsToPut).sum();
+//    private int toWinP2 = Arrays.stream(boatsToPut).sum();
+    private int toWinP1 = 3;
+    private int toWinP2 = 3;
     private int[] scoresArr = {toWinP1, toWinP2};
     private Board boardP1, boardP2;
     private Board[] players = new Board[2];
@@ -40,20 +42,22 @@ public class Game {
 
     public void putAllBoats() {
         System.out.println("Es el turno del jugador 1");
-        boardP1.updateBoard(false);
-        putBoats(boardP1);
-        boardP1.updateBoard(false);
+        boardP2.updateBoard(false);
+boardP2.fakeBoard();
+//        putBoats(boardP2);
+        boardP2.updateBoard(false);
         System.out.println("");
         System.out.println("Es el turno del jugador 2");
-        boardP2.updateBoard(false);
-        putBoats(boardP2);
-        boardP2.updateBoard(false);
+        boardP1.updateBoard(false);
+//        putBoats(boardP1);
+boardP1.fakeBoard();
+        boardP1.updateBoard(false);
     }
 
     public void changePlayer() {
         turn++;
         actualPlayer = (turn % 2);
-        System.out.printf("Es el turno del jugador %d", actualPlayer +1);
+//        System.out.printf("Es el turno del jugador %d", actualPlayer +1);
     }
     
     public boolean ckWin(int player){
@@ -68,12 +72,7 @@ public class Game {
         System.out.println("Turno del jugador " + (actualPlayer + 1));
         System.out.println("-----------------------------------");
         players[actualPlayer].updateBoard(true);
-//        System.out.print(">  Introduce columna (LETRA): ");
-//        String column = sc.nextLine();
-//        col = (int) column.toLowerCase().charAt(0);
-//        col -= 'a';
-//        System.out.print(">  Introduce fila (NUMERO): ");
-//        row = Integer.parseInt(sc.nextLine()) - 1;
+
         if (players[actualPlayer].shot()) {
             System.out.println("¡Impacto!");
             players[actualPlayer].isHit(true);
@@ -84,7 +83,7 @@ public class Game {
         }
         if (ckWin(actualPlayer)) {
             loop = false;
-            System.out.printf("------ HA GANADO EL JUGADOR %s -----", players[actualPlayer]);
+            System.out.printf("------ HA GANADO EL JUGADOR %d -----%n", actualPlayer);
         }
         changePlayer();
     }
