@@ -35,9 +35,17 @@ public class Comercial extends Empleado {
     }
 
     @Override
-    public void plus() {
-        setAnioAct(Year.now().getValue());
-        if (getAnioAct() - anio > 30 && comision > 200) {
+    public boolean hasPlus() {
+//        setAnioAct(Year.now().getValue());
+        if (super.hasPlus() && edad > 30 && comision > 200) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void plus(){
+        if(this.hasPlus()){
             salario += PLUS;
         }
     }

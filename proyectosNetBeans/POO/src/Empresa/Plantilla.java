@@ -4,6 +4,7 @@
  */
 package Empresa;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -39,8 +40,8 @@ public class Plantilla {
                     this.listaEmp[i] = new Comercial(comision, nombre, edad, salario, anio);
                     break;
                 case "repartidor":
-                    String zona = sc.nextLine();
                     System.out.println("Zona: ");
+                    String zona = sc.nextLine();
                     this.listaEmp[i] = new Repartidor(zona, nombre, edad, salario, anio);
                     break;
                 default:
@@ -52,8 +53,9 @@ public class Plantilla {
     }
     
     public void muestraPlantilla(){
-        for (Empleado empleado : listaEmp) {
-            empleado.toString();
+        for (int i = 0; i<listaEmp.length; i++) {
+            System.out.println(listaEmp[i].toString());
+
         }
     }
     

@@ -10,3 +10,6 @@
 /proyectosNetBeans/Strings/build/
 /proyectosNetBeans/POO/nbproject/private/
 /proyectosNetBeans/POO/build/
+.idea
+*.iml
+out/

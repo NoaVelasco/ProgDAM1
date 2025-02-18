@@ -4,6 +4,8 @@
  */
 package Empresa;
 
+import java.util.Scanner;
+
 /**
  *
  * @author dam1
@@ -14,10 +16,12 @@ public class Empresa {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
         // TODO code application logic here
         Plantilla p = new Plantilla();
-        p.contrata(3);
-        p.muestraPlantilla();
+        System.out.print("Ingrese el numero de empleados que desea contratar: ");
+        p.contrata(sc.nextInt());
+
     }
     
 }

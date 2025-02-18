@@ -28,9 +28,13 @@ public abstract class Empleado {
         this.anio = anio;
     }
 
-    public void plus() {
+    public boolean hasPlus() {
         anioAct = Year.now().getValue();
-        if (anioAct - anio >= 5) {
+        return anioAct - anio >= 5;
+    }
+
+    public void plus(){
+        if(hasPlus()){
             salario += PLUS;
         }
     }
