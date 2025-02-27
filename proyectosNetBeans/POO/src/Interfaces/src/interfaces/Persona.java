@@ -20,7 +20,6 @@ public class Persona implements Jugar{
         this.estado = estado;
     }
     
-    
 
     @Override
     public boolean PuedeJugar() {
@@ -29,7 +28,5 @@ public class Persona implements Jugar{
         }else
             return false;
     }
-    
-    
-    
+
 }

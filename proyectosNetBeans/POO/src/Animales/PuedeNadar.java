@@ -1,5 +1,5 @@
 package Animales;
 
 public interface PuedeNadar {
-    void nadar();
+    public void nadar();
 }
