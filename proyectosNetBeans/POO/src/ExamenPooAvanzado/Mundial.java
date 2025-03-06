@@ -17,6 +17,7 @@ public class Mundial {
 
     public ArrayList<Seleccion> selecciones = new ArrayList<>();
     public ArrayList<Seleccion> clasificados = new ArrayList<>();
+    public ArrayList<Seleccion> finalistas = new ArrayList<>();
     public final int NUM_EQUIPOS = 8;
     public String[] paises = {"Argentina",
         "Australia",
@@ -42,8 +43,13 @@ public class Mundial {
 //    ArrayList<String> apodos = new ArrayList<>(); 
 //    ArrayList<String> paises = new ArrayList<>(); 
 
+    
     public Mundial() {
         prepararSelecciones();
+    }
+
+    public void jugarMundial() {
+
         clasificacion();
         faseFinal();
     }
@@ -95,17 +101,18 @@ public class Mundial {
 
             }
         }
-        System.out.println("Se han clasificado ");
+        System.out.println("\nSe han clasificado ");
         System.out.println("Del grupo 1");
         for (int i = 0; i < 2; i++) {
             System.out.println(clasificados.get(i));
-            System.out.println("");
+//            System.out.println("");
         }
         System.out.println("Del grupo 2");
         for (int i = 2; i < 4; i++) {
             System.out.println(clasificados.get(i));
-            System.out.println("");
+//            System.out.println("");
         }
+        System.out.println("");
     }
 
     public void ganar(ArrayList<Seleccion> selecciones, int equipo) {
@@ -119,19 +126,28 @@ public class Mundial {
     public void faseFinal() {
         pasaRonda();
         esCampeon();
+//        for (int i = 0; i < clasificados.size(); i++) {
+//            System.out.print("País: ");
+//            System.out.println(clasificados.get(i).getPais());
+//            System.out.print("Puntos: ");
+//            System.out.println(clasificados.get(i).getPuntos());
+//        }
     }
 
     public void pasaRonda() {
         for (int i = 0; i < 2; i++) {
             int equipoGana = rnd.nextInt(2);
+//            System.out.println(equipoGana);
             if (equipoGana == 1) {
                 ganar(clasificados, i);
                 perder(clasificados, (i + 2));
+                finalistas.add(clasificados.get(i));
                 System.out.println("Gana esta ronda: " + clasificados.get(i).getPais());
                 clasificados.add(clasificados.get(i));
             } else {
                 perder(clasificados, i);
                 ganar(clasificados, (i + 2));
+                finalistas.add(clasificados.get(i+2));
                 System.out.println("Gana esta ronda: " + clasificados.get(i + 2).getPais());
                 clasificados.add(clasificados.get(i + 2));
             }
@@ -142,8 +158,8 @@ public class Mundial {
     public void esCampeon() {
         ordenar();
         System.out.println("El ganador del mundial eeeeeeeeeees...");
-        System.out.println(clasificados.get(0));
-        System.out.println("Con " + clasificados.get(0).getPuntos() + " puntos!");
+        System.out.println(finalistas.get(0));
+        System.out.println("Con " + finalistas.get(0).getPuntos() + " puntos!");
         
     }
 
@@ -151,14 +167,14 @@ public class Mundial {
 
         int menor;
 
-        for (int i = 0; i < clasificados.size(); i++) {
-            for (int j = i + 1; j < clasificados.size(); j++) {
-                int a = clasificados.get(i).getPuntos();
-                int b = clasificados.get(j).getPuntos();
+        for (int i = 0; i < finalistas.size(); i++) {
+            for (int j = i + 1; j < finalistas.size(); j++) {
+                int a = finalistas.get(i).getPuntos();
+                int b = finalistas.get(j).getPuntos();
                 if (a < b) {
                     menor = b;
-                    clasificados.get(j).setPuntos(a);
-                    clasificados.get(i).setPuntos(menor);
+                    finalistas.get(j).setPuntos(a);
+                    finalistas.get(i).setPuntos(menor);
 
                 }
             }

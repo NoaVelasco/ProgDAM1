@@ -19,7 +19,7 @@ public class Jugar {
     public static void main(String[] args) {
         // TODO code application logic here
         Mundial mundialete = new Mundial();
-//        mundiales.clasificacion();
+        mundialete.jugarMundial();
     }
     
 }

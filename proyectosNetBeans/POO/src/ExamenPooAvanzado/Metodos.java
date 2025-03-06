@@ -17,7 +17,7 @@ public class Metodos {
 //        33-168
         for (int i = 0; i < longitud; i++) {
 //            pass[i] = (char) ((Math.random() * 122) + 33);
-            pass[i] = (char) (rander.nextInt('a', 'z'));
+            pass[i] = (char) (rander.nextInt('a', 'z'+1));
         }
         return new String(pass);
     }
