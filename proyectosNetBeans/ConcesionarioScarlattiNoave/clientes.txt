@@ -1,0 +1,3 @@
+cliente1; apellido1; dni1; 123123123
+cliente2; apellid2; dni2; 343523524
+client3; ape3; dni3; 234324

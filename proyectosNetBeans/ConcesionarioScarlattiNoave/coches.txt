@@ -1,0 +1,4 @@
+opel; corsa; azul; 234234f
+toyota; corolla; metalizado; cddf
+toyota; yaris; amarillo; asdd
+citroen; twingo; rojo; 3423das
