@@ -4,12 +4,8 @@
  */
 package concesionariomvc;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -32,6 +28,7 @@ class Clientes {
     }
 
     public static void setList(Scanner sc) {
+        // Se encarga de añadir clientes al fichero clientes.txt hasta que el usuario diga no.
         String respuesta;
         System.out.print("Quieres introducir un nuevo cliente? ");
         respuesta = sc.nextLine();
@@ -47,9 +44,11 @@ class Clientes {
             long telefono;
             telefono = Long.parseLong(sc.nextLine());
 
+            // Hacemos un try con recursos para escribir en el fichero clientes.txt 
+            // y cerrar el flujo al terminar.
             try (
-                    FileWriter fw = new FileWriter("clientes.txt", true); // true sirve para añadir y no sobrescribir
-                     BufferedWriter bw = new BufferedWriter(fw);) {
+                FileWriter fw = new FileWriter("clientes.txt", true);
+                BufferedWriter bw = new BufferedWriter(fw);) {
                 bw.write(nombre + ";" + apellido + ";" + dni + ";" + telefono + "\n");
                 bw.flush();
             } catch (Exception ex) {
@@ -59,10 +58,10 @@ class Clientes {
             System.out.print("Quieres introducir un nuevo cliente? ");
             respuesta = sc.nextLine();
         }
-
     }
 
-    public static void refreshClients(ArrayList<Clientes> clientes) {
+    // Creo que esto no lo necesitamos para el ejercicio. ----------------------------------
+/*     public static void refreshClients(ArrayList<Clientes> clientes) {
         try (FileWriter fw = new FileWriter("clientes.txt"); BufferedWriter bw = new BufferedWriter(fw)) {
             for (Clientes cliente : clientes) {
                 bw.write(cliente.getNombre() + ";");
@@ -75,7 +74,7 @@ class Clientes {
         } catch (Exception ex) {
             System.out.println("No se puede leer el fichero\n" + ex);
         }
-    }
+    } */
 
     public String getNombre() {
         return nombre;
@@ -115,7 +114,7 @@ class Coches {
     }
 
     public static void setList(Scanner sc) {
-
+        // Se encarga de añadir coches al fichero coches.txt hasta que el usuario diga no.
         String respuesta;
         System.out.print("Quieres introducir un nuevo coche? ");
         respuesta = sc.nextLine();
@@ -130,9 +129,11 @@ class Coches {
             System.out.println("Introduce la matricula: ");
             String matricula = sc.nextLine();
 
+            // Hacemos un try con recursos para escribir en el fichero coches.txt
+            // y cerrar el flujo al terminar.
             try (
-                    FileWriter fw = new FileWriter("coches.txt", true); // true sirve para añadir y no sobrescribir
-                     BufferedWriter bw = new BufferedWriter(fw);) {
+                FileWriter fw = new FileWriter("coches.txt", true);
+                BufferedWriter bw = new BufferedWriter(fw);) {
                 bw.write(marca + ";" + modelo + ";" + color + ";" + matricula + "\n");
                 bw.flush();
             } catch (Exception ex) {
@@ -145,7 +146,8 @@ class Coches {
 
     }
 
-    public static void refreshCars(ArrayList<Coches> coches) {
+    public static void refreshFileCars(ArrayList<Coches> coches) {
+        // Se encarga de refrescar el fichero coches.txt con los coches que hay en el arraylist coches.
         try (FileWriter fw = new FileWriter("coches.txt"); BufferedWriter bw = new BufferedWriter(fw)) {
             for (Coches coche : coches) {
                 bw.write(coche.getMarca() + ";");
