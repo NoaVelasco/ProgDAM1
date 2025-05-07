@@ -34,6 +34,7 @@ class GUIClientes extends javax.swing.JFrame {
 //        initComponents(); // ESTO YA NO LO USO
         this.clientes = data.getClientes();
 
+        
         // En lugar de crear un JFrame, ya estamos en uno (extends).
         setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
