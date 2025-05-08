@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author dam1
  */
-class Demonio implements Serializable {  // si no serializa con un int, le pongo implements Serializable
+class Demonio implements Serializable {
     public static final int ID_DEMON = 0;
     private String nombre, clase;
     private int vida, ataque;
@@ -92,7 +92,7 @@ class Demonio implements Serializable {  // si no serializa con un int, le pongo
 }
 
 
-class Brujo {
+class Brujo implements Serializable {
     public static final int ID_WARLOK = 0;
     private String nombre;
 
