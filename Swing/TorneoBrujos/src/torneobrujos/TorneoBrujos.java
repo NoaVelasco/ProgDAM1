@@ -36,6 +36,6 @@ public class TorneoBrujos {
         controlador.asignarDemonios();
         
         // Iniciar la interfaz gráfica
-        new VentanaTorneo(controlador.getBrujos(), controlador.getDemonios());
+        new VentanaTorneo(controlador.getBrujos(), controlador.getDemonios(), controlador.ordenaDemonios());
     }
 }

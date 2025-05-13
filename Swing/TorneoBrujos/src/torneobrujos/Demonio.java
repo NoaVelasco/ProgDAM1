@@ -9,10 +9,8 @@ import java.io.Serializable;
  * Clase que representa a un demonio en el juego
  */
 public class Demonio implements Serializable {
-    private String nombre;
-    private String tipo;
-    private int vida;
-    private int ataque;
+    private String nombre, tipo, deBrujo;
+    private int vida, ataque, puntos;
     
     /**
      * Constructor de la clase Demonio
@@ -27,6 +25,7 @@ public class Demonio implements Serializable {
         this.tipo = tipo;
         this.vida = vida;
         this.ataque = ataque;
+        puntos = (int) (Math.random() * 400) + 1;
     }
     // Getters y setters
     public String getNombre() {
@@ -58,6 +57,25 @@ public class Demonio implements Serializable {
     public void setAtaque(int ataque) {
         this.ataque = ataque;
     }
+
+    public int getPuntos() {
+        return puntos;
+    }
+
+    public void setPuntos(int puntos) {
+        this.puntos = puntos;
+    }
+
+    public String getDeBrujo() {
+        return deBrujo;
+    }
+
+    public void setDeBrujo(String deBrujo) {
+        this.deBrujo = deBrujo;
+    }
+    
+    
+    
       @Override
     public String toString() {
         return nombre + " (" + tipo + ") - Vida: " + vida + ", Ataque: " + ataque;

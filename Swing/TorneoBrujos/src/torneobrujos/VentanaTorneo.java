@@ -21,16 +21,19 @@ public class VentanaTorneo extends JFrame {
     private JButton botonSiguienteRonda;
     private int rondaActual;
     private ArrayList<Brujo> ganadores;
+    private ArrayList<Demonio> bestDemons;
     
     /**
      * Constructor de la ventana principal
      * 
      * @param brujos Lista de brujos del torneo
      * @param demonios Lista de demonios
+     * @param bestDemons
      */
-    public VentanaTorneo(ArrayList<Brujo> brujos, ArrayList<Demonio> demonios) {
+    public VentanaTorneo(ArrayList<Brujo> brujos, ArrayList<Demonio> demonios, ArrayList<Demonio> bestDemons) {
         this.brujos = brujos;
         this.demonios = demonios;
+        this.bestDemons = bestDemons;
         this.rondaActual = 1;
         this.ganadores = new ArrayList<>();
         
@@ -181,7 +184,7 @@ public class VentanaTorneo extends JFrame {
                     JOptionPane.INFORMATION_MESSAGE);
             
             // Crear nueva ventana para la final
-            new VentanaFinal(ganadores.get(0), ganadores.get(1));
+            new VentanaFinal(ganadores.get(0), ganadores.get(1), bestDemons);
             
             // Cerrar esta ventana
             dispose();

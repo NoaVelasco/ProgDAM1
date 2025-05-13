@@ -6,6 +6,7 @@ package torneobrujos;
 import java.io.*;
 import java.util.ArrayList;
 
+
 /**
  * Clase controlador para manejar la lógica del torneo
  */
@@ -16,6 +17,7 @@ public class Controlador {
     
     private ArrayList<Demonio> todosDemonios;
     private ArrayList<Brujo> todosBrujos;
+    ArrayList<Demonio> bestDemons = new ArrayList<>();
 
     public Controlador() {
         todosDemonios = new ArrayList<>();
@@ -201,10 +203,34 @@ public class Controlador {
                 int indice = i * demoniosPorBrujo + j;
                 if (indice < todosDemonios.size()) {
                     brujo.añadirDemonio(todosDemonios.get(indice));
+                    todosDemonios.get(indice).setDeBrujo(brujo.getNombre());
                 }
             }
         }
     }
+    
+    /**
+     * Devuelve una lista de demonios con 300 o más puntos de vida,
+     * ordenados de mayor a menor según sus puntos de vida
+     * 
+     * @return Lista ordenada de demonios con más de 300 puntos
+     */
+    public ArrayList<Demonio> ordenaDemonios(){
+        bestDemons = new ArrayList<>();
+        
+        // Filtrar demonios con 300 o más puntos de vida
+        for (Demonio demonio : todosDemonios) {
+            if (demonio.getPuntos() >= 300) {
+                bestDemons.add(demonio);
+            }
+        }
+        
+        // Ordenar la lista por puntos de vida de mayor a menor
+        bestDemons.sort((d1, d2) -> Integer.compare(d2.getPuntos(), d1.getPuntos()));
+        
+        return bestDemons;
+    }
+    
       /**
      * Obtiene los brujos con sus demonios asignados
      * @return Lista de brujos
