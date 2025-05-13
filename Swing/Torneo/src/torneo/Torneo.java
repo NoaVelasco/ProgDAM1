@@ -17,7 +17,7 @@ public class Torneo {
         // TODO code application logic here
         Controlador cont = new Controlador();
         cont.inicializar();
-        TorneoFrame ventana = new TorneoFrame();  // falta meterle data
+
     }
     
 }

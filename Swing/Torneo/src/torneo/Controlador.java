@@ -32,6 +32,8 @@ public class Controlador {
         for (Demonio demonio : datos.getTodosDemonios()) {
             System.out.println(demonio.toString());
         }
+
+        GUISemifinal ventana = new GUISemifinal(datos);
     }
 
     void extraeDemonios(String ruta) {
@@ -47,7 +49,7 @@ public class Controlador {
 
     private void extraeDeTXT(String ruta, ArrayList<Demonio> demonios) {
         try (
-                FileReader fr = new FileReader(ruta+".txt"); BufferedReader br = new BufferedReader(fr);) {
+                FileReader fr = new FileReader(ruta + ".txt"); BufferedReader br = new BufferedReader(fr);) {
             String line = br.readLine();
             while (line != null) {
                 String[] campo = line.split(";");
@@ -64,7 +66,7 @@ public class Controlador {
 
     private void extraeDeDAT(String ruta, ArrayList<Demonio> demonios) {
         try {
-            FileInputStream fis = new FileInputStream(ruta+".dat");
+            FileInputStream fis = new FileInputStream(ruta + ".dat");
             ObjectInputStream ois = new ObjectInputStream(fis);
 
             while (true) {
@@ -88,7 +90,7 @@ public class Controlador {
 
     private void escribeDemonios(String ruta, ArrayList<Demonio> demonios) {
         try {
-            FileOutputStream fos = new FileOutputStream(ruta+".dat");
+            FileOutputStream fos = new FileOutputStream(ruta + ".dat");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             for (Demonio demonio : demonios) {
                 oos.writeObject(demonio);
@@ -99,34 +101,6 @@ public class Controlador {
         } catch (IOException ioEx) {
             System.out.println("No se pudo leer el fichero");
         }
-    }
-
-}
-
-class Data {
-
-    public ArrayList<Demonio> todosDemonios = new ArrayList<>();
-    public ArrayList<Brujo> todosBrujos = new ArrayList<>();
-    public final String PATH_DEMONS_TXT = "demonios.txt";
-    public final String PATH_DEMONS_DAT = "demonios.dat";
-    public final String PATH_DEMONS = "demonios";
-    public final String PATH_BRUJOS_DAT = "brujos.dat";
-
-    public Brujo brujo1 = new Brujo("Malakar el Maldito");
-    public Brujo brujo2 = new Brujo("Morgana Sombraluna");
-    public Brujo brujo3 = new Brujo("Vexion el Corruptor");
-    public Brujo brujo4 = new Brujo("Lilith Sangreoscura");
-
-    public Data() {
-        todosBrujos.add(brujo1);
-        todosBrujos.add(brujo2);
-        todosBrujos.add(brujo3);
-        todosBrujos.add(brujo4);
-//        extraeDemonios(PATH_DEMONS_TXT);
-    }
-
-    public ArrayList<Demonio> getTodosDemonios() {
-        return todosDemonios;
     }
 
 }

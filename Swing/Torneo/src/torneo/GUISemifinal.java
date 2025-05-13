@@ -4,6 +4,7 @@
  */
 package torneo;
 
+import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import java.awt.Color;
 import java.awt.Font;
@@ -24,10 +25,7 @@ import javax.swing.WindowConstants;
  *
  * @author dam1
  */
-public class Vista {
-}
-
-class TorneoFrame extends JFrame {
+public class GUISemifinal extends JFrame {
 
     JPanel jPanel1 = new JPanel();
     JPanel jPanel2 = new JPanel();
@@ -47,13 +45,38 @@ class TorneoFrame extends JFrame {
     JButton jButtonFinale = new JButton();
 
     Data datos;
-    
-        public TorneoFrame() {
-            
+
+    JButton[] botonesGana;
+    JButton[] botonesEquipo;
+
+    public GUISemifinal(Data data) {
+        initComponents(data);
+    }
+
+    public void initComponents(Data data) {
+        datos = data;
+
+        JPanel pnlSuperior = new JPanel(new BorderLayout());
+        JPanel pnlBrujos = new JPanel(new BorderLayout());
+        JPanel pnlInferior = new JPanel(new BorderLayout());
+
+        JLabel fase = new JLabel("SEMIFINAL");
+        pnlSuperior.add(fase, BorderLayout.NORTH);
+
+        botonesGana = new JButton[4];
+        botonesEquipo = new JButton[4];
+        for (int i = 0; i < datos.todosBrujos.size(); i++) {
+            JPanel pnlBrujo = new JPanel();
+            JButton btnEquipo = new JButton(datos.todosBrujos.get(i).getNombre());
+            JButton btnGana = new JButton("GANA");
+            botonesGana[i] = btnGana;
+            botonesEquipo[i] = btnEquipo;
+
+            btnEquipo.addActionListener((ActionEvent e) -> {
+
+            });
         }
-    
-    public TorneoFrame(Data data) {
-        this.datos = data;
+
         Color green = new java.awt.Color(30, 130, 30);
         brujo3.setBackground(green);
 
