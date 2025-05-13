@@ -6,14 +6,15 @@ package torneo;
 
 import java.io.BufferedReader;
 import java.io.EOFException;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import javax.swing.JButton;
 
 /**
  *
@@ -107,6 +108,8 @@ class Data {
 
     public ArrayList<Demonio> todosDemonios = new ArrayList<>();
     public ArrayList<Brujo> todosBrujos = new ArrayList<>();
+    public ArrayList<Brujo> clasifBrujos;
+    public ArrayList<JButton> btnGanaBrujo;
     public final String PATH_DEMONS_TXT = "demonios.txt";
     public final String PATH_DEMONS_DAT = "demonios.dat";
     public final String PATH_DEMONS = "demonios";
@@ -122,11 +125,17 @@ class Data {
         todosBrujos.add(brujo2);
         todosBrujos.add(brujo3);
         todosBrujos.add(brujo4);
+        
+        clasifBrujos = (ArrayList<Brujo>) todosBrujos.clone();
 //        extraeDemonios(PATH_DEMONS_TXT);
     }
 
     public ArrayList<Demonio> getTodosDemonios() {
         return todosDemonios;
     }
+
+
+    
+    
 
 }

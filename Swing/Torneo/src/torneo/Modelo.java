@@ -6,6 +6,9 @@ package torneo;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import javax.imageio.plugins.jpeg.JPEGHuffmanTable;
+import javax.swing.JButton;
+import javax.swing.JPanel;
 
 /**
  *
@@ -17,6 +20,7 @@ class Demonio implements Serializable {
     private int vida, ataque;
     private Brujo amo;
     private boolean convocado;
+    JButton btnDesconvo;
 
     public Demonio(String nombre, String clase, int vida, int ataque) {
         this.nombre = nombre;
@@ -83,6 +87,15 @@ class Demonio implements Serializable {
         this.convocado = convocado;
     }
 
+    public JButton getBtnDesconvo() {
+        return btnDesconvo;
+    }
+
+    public void setBtnDesconvo(JButton btnDesconvo) {
+        this.btnDesconvo = btnDesconvo;
+    }
+
+    
     
     @Override
     public String toString() {
@@ -95,9 +108,12 @@ class Demonio implements Serializable {
 class Brujo implements Serializable {
     public static final int ID_WARLOK = 0;
     private String nombre;
-
     private boolean semifinalista;
     private boolean finalista;
+    private boolean activo = true;
+    private JPanel panel;
+    private JButton botonGana;
+    
     
     public ArrayList<Demonio> misDemonios = new ArrayList<>();
 

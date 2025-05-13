@@ -68,7 +68,6 @@ class TorneoFrame extends JFrame {
                         .addGap(0, 166, Short.MAX_VALUE)
         );
 
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(30, 30, 130));
 
@@ -319,6 +318,7 @@ class TorneoFrame extends JFrame {
                                 .addComponent(jPanel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())
         );
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         setBounds(100, 100, 756, 525);
         setVisible(true);
