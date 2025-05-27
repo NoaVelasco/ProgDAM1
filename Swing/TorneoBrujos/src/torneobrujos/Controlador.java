@@ -1,18 +1,12 @@
-/*
- * Controlador para gestionar la lógica de negocio del torneo
- */
 package torneobrujos;
 
 import java.io.*;
 import java.util.ArrayList;
 
 
-/**
- * Clase controlador para manejar la lógica del torneo
- */
+
 public class Controlador {
 
-    // Ruta al archivo de demonios
     public final String PATH_DEMONS = "demonios";
     
     private ArrayList<Demonio> todosDemonios;
@@ -22,12 +16,11 @@ public class Controlador {
     public Controlador() {
         todosDemonios = new ArrayList<>();
         todosBrujos = new ArrayList<>();
-    }    /**
-     * Inicializa el controlador cargando los datos
-     */
+    }    
+    
+    
     void inicializar() {
         extraeDemonios(PATH_DEMONS);
-        // Mostrar información de los demonios cargados
         if (!todosDemonios.isEmpty()) {
             System.out.println("Se han cargado " + todosDemonios.size() + " demonios:");
             for (Demonio demonio : todosDemonios) {
@@ -36,16 +29,14 @@ public class Controlador {
         } else {
             System.out.println("No se han podido cargar demonios.");
         }
-    }    /**
-     * Extrae los demonios desde los archivos
-     * 
-     * @param ruta Ruta base del archivo
-     */
+    }    
+    
+    
     void extraeDemonios(String ruta) {
-        // Limpiamos la lista para evitar duplicados
+
         todosDemonios.clear();
 
-        // Si no hay demonios en DAT, cargamos desde TXT y generamos el DAT
+
         if (!extraeDeDAT(ruta, todosDemonios)) {
             extraeDeTXT(ruta, todosDemonios);
         }
@@ -53,19 +44,13 @@ public class Controlador {
             escribeDemonios(ruta, todosDemonios);
             System.out.println("Se ha generado el archivo " + ruta + ".dat con " + todosDemonios.size() + " demonios");
         } else {
-            // Si no hay demonios en TXT, generamos algunos por defecto
             crearDemoniosPorDefecto(todosDemonios);
             escribeDemonios(ruta, todosDemonios);
             System.out.println("Se ha generado el archivo " + ruta + ".dat con demonios por defecto");
         }
     }
 
-    /**
-     * Extrae demonios desde un archivo de texto
-     * 
-     * @param ruta Ruta base del archivo
-     * @param demonios Lista donde añadir los demonios
-     */
+
     private void extraeDeTXT(String ruta, ArrayList<Demonio> demonios) {
         try (
                 FileReader fr = new FileReader(ruta+".txt"); 
@@ -88,12 +73,7 @@ public class Controlador {
         }
     }
 
-    /**
-     * Extrae demonios desde un archivo binario
-     * 
-     * @param ruta Ruta base del archivo
-     * @param demonios Lista donde añadir los demonios
-     */
+
     private boolean extraeDeDAT(String ruta, ArrayList<Demonio> demonios) {
         try (
                 FileInputStream fis = new FileInputStream(ruta+".dat");
@@ -118,12 +98,7 @@ public class Controlador {
         return false;
     }
 
-    /**
-     * Escribe los demonios en un archivo binario
-     * 
-     * @param ruta Ruta base del archivo
-     * @param demonios Lista de demonios a escribir
-     */
+
     private void escribeDemonios(String ruta, ArrayList<Demonio> demonios) {
         try (
                 FileOutputStream fos = new FileOutputStream(ruta+".dat");
@@ -140,11 +115,7 @@ public class Controlador {
         }
     }
     
-    /**
-     * Crea algunos demonios por defecto en caso de error al cargar el archivo
-     * 
-     * @param demonios Lista donde añadir los demonios
-     */
+
     private void crearDemoniosPorDefecto(ArrayList<Demonio> demonios) {
         demonios.add(new Demonio("Azeroth", "fuego", 450, 85));
         demonios.add(new Demonio("Nyx", "agua", 320, 45));
@@ -168,15 +139,11 @@ public class Controlador {
         demonios.add(new Demonio("Boltcaster", "rayo", 320, 70));
         
     }
-      /**
-     * Crea los brujos del torneo
-     * @return Lista de brujos
-     */
+ 
+    
     public ArrayList<Brujo> crearBrujos() {
-        // Limpiamos la lista para evitar duplicados
         todosBrujos.clear();
         
-        // Crear los 4 brujos del torneo
         Brujo b1 = new Brujo("Malakar el Maldito");
         Brujo b2 = new Brujo("Morgana Sombraluna");
         Brujo b3 = new Brujo("Vexion el Corruptor");
@@ -189,11 +156,9 @@ public class Controlador {
         
         return todosBrujos;
     }
-      /**
-     * Asigna demonios a los brujos
-     */
+
+    
     public void asignarDemonios() {
-        // Asignamos demonios a cada brujo (no más de 10 a cada uno)
         int demoniosPorBrujo = Math.min(todosDemonios.size() / todosBrujos.size(), 10);
         
         for (int i = 0; i < todosBrujos.size(); i++) {
@@ -209,40 +174,30 @@ public class Controlador {
         }
     }
     
-    /**
-     * Devuelve una lista de demonios con 300 o más puntos de vida,
-     * ordenados de mayor a menor según sus puntos de vida
-     * 
-     * @return Lista ordenada de demonios con más de 300 puntos
-     */
+
+    
     public ArrayList<Demonio> ordenaDemonios(){
         bestDemons = new ArrayList<>();
         
-        // Filtrar demonios con 300 o más puntos de vida
+        //  demonios con 300 o más puntos de vida
         for (Demonio demonio : todosDemonios) {
             if (demonio.getPuntos() >= 300) {
                 bestDemons.add(demonio);
             }
         }
         
-        // Ordenar la lista por puntos de vida de mayor a menor
+        // de mayor a menor (adiós algoritmos de ordenación)
         bestDemons.sort((d1, d2) -> Integer.compare(d2.getPuntos(), d1.getPuntos()));
         
         return bestDemons;
     }
     
-      /**
-     * Obtiene los brujos con sus demonios asignados
-     * @return Lista de brujos
-     */
+
     public ArrayList<Brujo> getBrujos() {
         return todosBrujos;
     }
     
-    /**
-     * Obtiene todos los demonios
-     * @return Lista de demonios
-     */
+
     public ArrayList<Demonio> getDemonios() {
         return todosDemonios;
     }

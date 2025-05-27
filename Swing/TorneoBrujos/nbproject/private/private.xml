@@ -8,8 +8,11 @@
         </group>
         <group>
             <file>file:/F:/Programacion/Swing/TorneoBrujos/src/torneobrujos/VentanaDetalleBrujo.java</file>
+            <file>file:/F:/Programacion/Swing/TorneoBrujos/src/torneobrujos/VentanaTorneo.java</file>
             <file>file:/F:/Programacion/Swing/TorneoBrujos/src/torneobrujos/VentanaFinal.java</file>
             <file>file:/F:/Programacion/Swing/TorneoBrujos/src/torneobrujos/TorneoBrujos.java</file>
+            <file>file:/F:/Programacion/Swing/TorneoBrujos/src/torneobrujos/Controlador.java</file>
+            <file>file:/F:/Programacion/Swing/TorneoBrujos/src/torneobrujos/Demonio.java</file>
         </group>
     </open-files>
 </project-private>

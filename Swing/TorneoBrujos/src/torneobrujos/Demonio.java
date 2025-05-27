@@ -5,21 +5,12 @@ package torneobrujos;
 
 import java.io.Serializable;
 
-/**
- * Clase que representa a un demonio en el juego
- */
+
 public class Demonio implements Serializable {
     private String nombre, tipo, deBrujo;
     private int vida, ataque, puntos;
     
-    /**
-     * Constructor de la clase Demonio
-     * 
-     * @param nombre Nombre del demonio
-     * @param tipo Tipo de demonio
-     * @param vida Puntos de vida del demonio
-     * @param ataque Puntos de ataque del demonio
-     */
+
     public Demonio(String nombre, String tipo, int vida, int ataque) {
         this.nombre = nombre;
         this.tipo = tipo;
