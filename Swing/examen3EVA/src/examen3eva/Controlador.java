@@ -6,6 +6,7 @@ package examen3eva;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  *
@@ -16,7 +17,7 @@ public class Controlador {
     public final String RUTA_DATOS = "datos";
     private ArrayList<Empleado> datos;
 
-    // Constructor del controlador
+
     public Controlador() {
         datos = new ArrayList<>();
     }
@@ -24,8 +25,7 @@ public class Controlador {
     public void inicializar() {
         cargarDatos(RUTA_DATOS);
 
-        // Añado aquí el resto de lógica
-        // ...
+
     }
 
     private void cargarDatos(String ruta) {
@@ -37,18 +37,18 @@ public class Controlador {
             while (line != null) {
                 String[] extraction = line.split("#");
 //                ### dni # nombre # ape1 # anyonac ###fijo # factura # percent
-                String dni = extraction[1];
+                String dni = extraction[1].trim();
                 String nombre = extraction[2];
                 String ape = extraction[3];
                 String[] datoDoble = extraction[4].trim().split(" ");
-                int anio = Integer.parseInt(datoDoble[0]);
+                int anio = Integer.parseInt(datoDoble[0].trim());
                 Double fijo = Double.parseDouble(datoDoble[1]);
                 Double factura = Double.parseDouble(extraction[5]);
                 Double porcentaje = Double.parseDouble(extraction[6]);
 
                 Empleado e = new Empleado(dni, nombre, ape, anio, fijo, factura, porcentaje);
                 datos.add(e);
-                
+
                 // 🐞🐞🐞 DEPURAR
 //                System.out.println(e.toString());
 //                for (int i = 0; i < datos.length; i++) {
@@ -68,23 +68,74 @@ public class Controlador {
         System.out.println("vamos");
     }
 
-    private void guardarDatos(String ruta) {
+    void filtraTotal() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Introduce la cantidad de corte: ");
+        int nominaMin = Integer.parseInt(sc.nextLine());
+        ArrayList<Empleado> seleccionados = new ArrayList<>();
 
-        // Escritura de caracteres o de bytes modo sobrescribir
-        // Si es binario, añado con agregarElemento(objeto)
-    }
-
-    public void agregarElemento(Empleado elemento) {
-        datos.add(elemento);
-        guardarDatos(RUTA_DATOS);
-    }
-
-    // Si tengo que eliminar objetos + bytes:
-    public void eliminarElemento(int indice) {
-        if (indice >= 0 && indice < datos.size()) {
-            datos.remove(indice);
-            guardarDatos(RUTA_DATOS);
+        for (Empleado e : datos) {
+            if (e.getTotal() >= nominaMin) {
+                seleccionados.add(e);
+            }
         }
+
+        escribeTablaHTML(seleccionados);
+
+    }
+
+    void escribeTablaHTML(ArrayList<Empleado> selec) {
+
+        try (
+                FileWriter fw = new FileWriter("empleados.html", false); BufferedWriter bw = new BufferedWriter(fw);) {
+            bw.write("""
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Demonios</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>DNI</th>
+            <th>TOTAL</th>
+        </tr>
+        <tr>
+                     """);
+            for (Empleado emp : selec) {
+                bw.write("<tr>");
+                bw.write("<td>" + emp.getDni() + "</td>");
+                bw.write("<td>" + emp.getTotal() + "</td>");
+                bw.write("</tr>");
+                bw.flush();
+            }
+            bw.write("""
+                             </tr>
+                         </table>
+                     </body>
+                     </html>
+                     """);
+
+        } catch (FileNotFoundException ex) {
+            System.out.println("No se encuentra el fichero.");
+        } catch (IOException ex) {
+            System.out.println("No se puede escribir en el fichero.");
+        }
+
     }
 
     public ArrayList<Empleado> getDatos() {

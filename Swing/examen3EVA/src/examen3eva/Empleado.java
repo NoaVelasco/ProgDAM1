@@ -22,6 +22,10 @@ public class Empleado {
 
     Double total;
 
+    int dniNum;
+    char dniLet;
+    String nums;
+    
     public Empleado() {
     }
 
@@ -34,6 +38,12 @@ public class Empleado {
         this.factura = factura;
         this.porcentaje = porcentaje;
 
+        nums = "";
+        for (int i = 0; i < dni.length()-1; i++) {
+            nums += dni.charAt(i);
+        }
+        this.dniNum = Integer.parseInt(nums);
+        this.dniLet = (char)dni.charAt(8);
         this.total = 0.0;
     }
 
@@ -105,11 +115,35 @@ public class Empleado {
         this.total = total;
     }
 
-    
-    
+    public int getDniNum() {
+        return dniNum;
+    }
+
+    public void setDniNum(int dniNum) {
+        this.dniNum = dniNum;
+    }
+
+    public char getDniLet() {
+        return dniLet;
+    }
+
+    public void setDniLet(char dniLet) {
+        this.dniLet = dniLet;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 7;
+        int hash = 3;
+        hash = 89 * hash + Objects.hashCode(this.dni);
+        hash = 89 * hash + Objects.hashCode(this.nombre);
+        hash = 89 * hash + Objects.hashCode(this.ape);
+        hash = 89 * hash + this.anio;
+        hash = 89 * hash + Objects.hashCode(this.fijo);
+        hash = 89 * hash + Objects.hashCode(this.factura);
+        hash = 89 * hash + Objects.hashCode(this.porcentaje);
+        hash = 89 * hash + Objects.hashCode(this.total);
+        hash = 89 * hash + this.dniNum;
+        hash = 89 * hash + this.dniLet;
         return hash;
     }
 
@@ -128,15 +162,40 @@ public class Empleado {
         if (this.anio != other.anio) {
             return false;
         }
+        if (this.dniNum != other.dniNum) {
+            return false;
+        }
+        if (this.dniLet != other.dniLet) {
+            return false;
+        }
         if (!Objects.equals(this.dni, other.dni)) {
+            return false;
+        }
+        if (!Objects.equals(this.nombre, other.nombre)) {
+            return false;
+        }
+        if (!Objects.equals(this.ape, other.ape)) {
+            return false;
+        }
+        if (!Objects.equals(this.fijo, other.fijo)) {
+            return false;
+        }
+        if (!Objects.equals(this.factura, other.factura)) {
+            return false;
+        }
+        if (!Objects.equals(this.porcentaje, other.porcentaje)) {
             return false;
         }
         return Objects.equals(this.total, other.total);
     }
 
+    
+    
+
+
     @Override
     public String toString() {
-        return "Empleado: " + "dni=" + dni + ", nombre=" + nombre + ", ape=" + ape + ", anio=" + anio + ", fijo=" + fijo + ", factura=" + factura + ", porcentaje=" + porcentaje + ", total=" + total;
+        return "Empleado: " + "dni=" + dni + ", nombre=" + nombre + ", ape=" + ape + ", anio=" + anio + ", fijo=" + fijo + ", factura=" + factura + ", porcentaje=" + porcentaje + ", total=" + total + " - " + dniLet +  dniNum;
     }
 
 }
