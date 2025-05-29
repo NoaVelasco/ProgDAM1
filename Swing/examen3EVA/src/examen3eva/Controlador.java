@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class Controlador {
 
     public final String RUTA_DATOS = "datos";
-    private ArrayList<Object> datos;
+    private ArrayList<Empleado> datos;
 
     // Constructor del controlador
     public Controlador() {
@@ -40,22 +40,17 @@ public class Controlador {
                 String dni = extraction[1];
                 String nombre = extraction[2];
                 String ape = extraction[3];
-//                extraction[4].trim();
                 String[] datoDoble = extraction[4].trim().split(" ");
-                System.out.println(datoDoble[0] + " - " + datoDoble[1]);
                 int anio = Integer.parseInt(datoDoble[0]);
                 Double fijo = Double.parseDouble(datoDoble[1]);
                 Double factura = Double.parseDouble(extraction[5]);
                 Double porcentaje = Double.parseDouble(extraction[6]);
 
                 Empleado e = new Empleado(dni, nombre, ape, anio, fijo, factura, porcentaje);
-                System.out.println(e.toString());
-                System.out.println((int) (1500 + 10000 * 3.0 * 0.01));
-                
                 datos.add(e);
                 
-                
                 // 🐞🐞🐞 DEPURAR
+//                System.out.println(e.toString());
 //                for (int i = 0; i < datos.length; i++) {
 //
 //                    System.out.println(i + " - " + datos[i]);
@@ -64,11 +59,13 @@ public class Controlador {
                 line = br.readLine();
             }
         } catch (FileNotFoundException ex) {
-            System.out.println("No se encuentra el fichero.");
+            System.out.println("No se encuentra el fichero. Asegúrate de que tienes un fichero 'datos.txt' válido en el directorio raíz.");
+            System.exit(0);
         } catch (IOException ex) {
-            System.out.println("No se puede leer el fichero.");
+            System.out.println("No se puede leer el fichero. Asegúrate de que tienes un fichero 'datos.txt' válido en el directorio raíz.");
+            System.exit(0);
         }
-
+        System.out.println("vamos");
     }
 
     private void guardarDatos(String ruta) {
@@ -77,7 +74,7 @@ public class Controlador {
         // Si es binario, añado con agregarElemento(objeto)
     }
 
-    public void agregarElemento(Object elemento) {
+    public void agregarElemento(Empleado elemento) {
         datos.add(elemento);
         guardarDatos(RUTA_DATOS);
     }
@@ -90,7 +87,7 @@ public class Controlador {
         }
     }
 
-    public ArrayList<Object> getDatos() {
+    public ArrayList<Empleado> getDatos() {
         return datos;
     }
 }

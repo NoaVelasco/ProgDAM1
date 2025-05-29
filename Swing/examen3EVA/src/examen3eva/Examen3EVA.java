@@ -23,12 +23,11 @@ public class Examen3EVA {
 
     private static void iniciarAplicacion() {
 
-        // Crear el controlador y cargar datos
         Controlador controlador = new Controlador();
         controlador.inicializar();
 
-        // Iniciar la interfaz gráfica
-//        new VentanaPrincipal(controlador);
+        VentanaPrincipal ventana = new VentanaPrincipal(controlador);
+        ventana.setVisible(true);
     }
 
 }
