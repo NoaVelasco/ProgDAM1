@@ -4,8 +4,11 @@
  */
 package formularioddr;
 
+import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import javax.swing.LayoutStyle;
 import javax.swing.WindowConstants;
 
 /**
@@ -29,8 +32,11 @@ public class JFormPlantilla extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     private void initComponents() {//GEN-BEGIN:initComponents
 
+        ButtonGroup buttonGroup1 = new ButtonGroup();
         JTextField jTextField1 = new JTextField();
         JTextField jTextField2 = new JTextField();
+        JRadioButton jRadioButton1 = new JRadioButton();
+        JRadioButton jRadioButton2 = new JRadioButton();
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
@@ -38,15 +44,23 @@ public class JFormPlantilla extends javax.swing.JFrame {
 
         jTextField2.setText("jTextField2");
 
+        buttonGroup1.add(jRadioButton1);
+        jRadioButton1.setText("jRadioButton1");
+
+        buttonGroup1.add(jRadioButton2);
+        jRadioButton2.setText("jRadioButton2");
+
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(67, 67, 67)
                 .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addComponent(jRadioButton2)
+                    .addComponent(jRadioButton1)
                     .addComponent(jTextField2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(262, Short.MAX_VALUE))
+                .addContainerGap(235, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -54,7 +68,11 @@ public class JFormPlantilla extends javax.swing.JFrame {
                 .addComponent(jTextField1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jTextField2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(202, Short.MAX_VALUE))
+                .addGap(60, 60, 60)
+                .addComponent(jRadioButton1)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jRadioButton2)
+                .addContainerGap(94, Short.MAX_VALUE))
         );
 
         pack();

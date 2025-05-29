@@ -10,7 +10,7 @@ public class Controlador {
     // Rutas a archivos de datos persistentes
     public final String RUTA_DATOS = "datos";
     // Colecciones para los modelos de datos
-    private ArrayList<Object> datos;
+    private ArrayList<Profesor> datos;
 
     static Scanner sc = new Scanner(System.in);
 
@@ -24,12 +24,13 @@ public class Controlador {
         if (preguntarSiNo("Quieres introducir datos? \n(Si no, generamos una lista predefinida)")) {
             setList(RUTA_DATOS);
         } else {
-            cargarDatos(RUTA_DATOS);
+//            cargarDatos(RUTA_DATOS);  // texto plano
+            cargarDatosBin(RUTA_DATOS);  // bytes
         }
 
         // Añado aquí el resto de lógica
         // ...
-        for (Object dato : datos) {
+        for (Profesor dato : datos) {
             System.out.println(dato.toString());
         }
     }
@@ -47,22 +48,12 @@ public class Controlador {
             System.out.println("Fijo? S/N ");
             String fijo = sc.nextLine();
 
-            datos.add(new Profesor(Integer.parseInt(salario), fijo.equalsIgnoreCase("s"), dni, nombre));
-            try (
-                    FileWriter fw = new FileWriter(ruta + ".txt", true); BufferedWriter bw = new BufferedWriter(fw);) {
+            Profesor profe = new Profesor(Integer.parseInt(salario), fijo.equalsIgnoreCase("s"), dni, nombre);
 
-                bw.write(
-                        nombre + ";"
-                        + dni + ";"
-                        + salario + ";"
-                        + fijo + "\n"
-                );
-                bw.flush();
-            } catch (Exception ex) {
-                System.out.println("No se puede leer el fichero\n" + ex.toString());
-            }
+            agregarElemento(profe);
 
         }
+        guardarDatos(ruta);
     }
 
     public boolean preguntarSiNo(String pregunta) {
@@ -84,14 +75,14 @@ public class Controlador {
             String line = br.readLine();
             while (line != null) {
                 String[] datosLeidos = line.split(";");
-                // LOGICA
+
                 String nombre = datosLeidos[0];
                 String dni = datosLeidos[1];
                 String salario = datosLeidos[2];
                 String fijo = datosLeidos[3];
-                Profesor profe = new Profesor(Integer.parseInt(salario), fijo.equalsIgnoreCase("true"), dni, nombre);
+                Profesor profe = new Profesor(Double.parseDouble(salario), fijo.equalsIgnoreCase("true"), dni, nombre);
                 datos.add(profe);
-                
+
                 line = br.readLine();
             }
 
@@ -102,16 +93,48 @@ public class Controlador {
         }
     }
 
-//    private void guardarDatos(String ruta) {
+    private void guardarDatos(String ruta) {
+        // IO texto plano ----------------------------------------------------
+//        try (
+//                FileWriter fw = new FileWriter(ruta + ".txt", true); BufferedWriter bw = new BufferedWriter(fw);) {
 //
-//        // Escritura de caracteres o de bytes modo sobrescribir
-//        // Si es binario, añado con agregarElemento(objeto)
-//    }
+//            for (Profesor dato : datos) {
+//                bw.write(
+//                        dato.getNombre() + ";"
+//                        + dato.getDni() + ";"
+//                        + dato.getSalario() + ";"
+//                        + dato.isFijo() + "\n"
+//                );
+//            }
+//            bw.flush();
+//
+//        } catch (FileNotFoundException e) {
+//            System.out.println("No se encontró el fichero");
+//        } catch (IOException ioEx) {
+//            System.out.println("No se pudo escribir en el fichero");
+//        }
+        // --------------------------------------------------------------------
+        
+        // IO bytes ----------------------------------------
+        try (FileOutputStream fos = new FileOutputStream(ruta + ".dat"); ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+            for (Profesor dato : datos) {
 
-//    public void agregarElemento(Object elemento) {
-//        datos.add(elemento);
-//        guardarDatos(RUTA_DATOS);
-//    }
+                oos.writeObject(dato);
+                oos.flush();
+            }
+
+        } catch (FileNotFoundException e) {
+            System.out.println("No se encontró el fichero");
+        } catch (IOException ioEx) {
+            System.out.println("No se pudo escribir en el fichero");
+        }
+
+    }
+
+    public void agregarElemento(Profesor elemento) {
+        datos.add(elemento);
+
+    }
 
 //    // Si tengo que eliminar objetos + bytes:
 //    public void eliminarElemento(int indice) {
@@ -121,7 +144,32 @@ public class Controlador {
 //        }
 //    }
 
-    public ArrayList<Object> getDatos() {
+    private void cargarDatosBin(String ruta) {
+
+        try (
+                FileInputStream fis = new FileInputStream(ruta + ".dat"); ObjectInputStream ois = new ObjectInputStream(fis);) {
+
+            while (true) {
+                try {
+                    Profesor profe = (Profesor) ois.readObject();
+                    datos.add(profe);
+                } catch (EOFException e) {
+                    System.out.println("Fin del archivo");
+                    break;
+                }
+            }
+        } catch (FileNotFoundException ex) {
+            System.out.println("No se encuentra");
+        } catch (IOException ex2) {
+            System.out.println("No se pudo leer");
+        } catch (ClassNotFoundException ex3) {
+            System.out.println("No se pudo leer la clase");
+
+        }
+    }
+    
+    
+    public ArrayList<Profesor> getDatos() {
         return datos;
     }
 }

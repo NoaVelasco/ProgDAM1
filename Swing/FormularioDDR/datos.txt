@@ -1,2 +1,4 @@
-Jorge;23131231h;8000;y
-Pedro;23143232k;35000;n
+sergio;13123f;222.0;true
+jose;2e123e23ef;22.0;false
+jasdjsa;3432424;44332.0;true
+lasdasd;23e23399;888888.0;false
